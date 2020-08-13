@@ -1,34 +1,41 @@
 # Game Ping-Pong
 
+#Framework de interface gráfica
 from tkinter import *
 import random
 import time
 
 level = int(input("Qual nível você gostaria de jogar? 1/2/3/4/5 \n"))
+# O nivel de dificuldade é medido pelo tamanho da barra que rebate a bola
 length = 500/level
 
-
+#Instanciando a Janela da interface gráfica e configurando algumas características
 root = Tk()
 root.title("Ping Pong")
 root.resizable(0,0)
 root.wm_attributes("-topmost", -1)
 
+#Configurando a tela do programa
 canvas = Canvas(root, width=800, height=600, bd=0,highlightthickness=0)
 canvas.pack()
-
+# "pintando" a tela na janela aberta
 root.update()
 
 # Variável
 count = 0
 lost = False
 
+# O que faz a classe bola: cria uma na tela e se movimenta para uma nova posição indicada
 class Bola:
     def __init__(self, canvas, Barra, color):
+        #armazenando as referencias da interface gráfica
         self.canvas = canvas
         self.Barra = Barra
+        #Criando a bola na posição (0,0), com diametro 15px (até 15,15), na cor
         self.id = canvas.create_oval(0, 0, 15, 15, fill=color)
+        #Posiciona a bola na posição (245, 200)
         self.canvas.move(self.id, 245, 200)
-
+        #Randomiza os elementos da lista
         starts_x = [-3, -2, -1, 1, 2, 3]
         random.shuffle(starts_x)
 
